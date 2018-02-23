@@ -21,6 +21,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -1065,6 +1066,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler {
         }
     }
 
+    @SuppressLint("StringFormatMatches")
     public String getItemMoveDescription(int cellX, int cellY) {
         if (mContainerType == HOTSEAT) {
             return getContext().getString(R.string.move_to_hotseat_position,

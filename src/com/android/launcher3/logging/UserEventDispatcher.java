@@ -53,6 +53,7 @@ import static com.android.launcher3.logging.LoggerUtils.newTouchAction;
  * To debug this class, execute following command before side loading a new apk.
  *
  * $ adb shell setprop log.tag.UserEvent VERBOSE
+ * 用户事件发送者
  */
 public class UserEventDispatcher {
 

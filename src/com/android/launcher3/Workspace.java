@@ -586,6 +586,7 @@ public class Workspace extends PagedView
      * Initializes and binds the first page
      * @param qsb an existing qsb to recycle or null.
      */
+    @SuppressLint("ClickableViewAccessibility")
     public void bindAndInitFirstWorkspaceScreen(View qsb) {
         if (!FeatureFlags.QSB_ON_FIRST_SCREEN) {
             return;

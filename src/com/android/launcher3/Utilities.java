@@ -37,7 +37,6 @@ import android.os.Bundle;
 import android.os.DeadObjectException;
 import android.os.PowerManager;
 import android.os.TransactionTooLargeException;
-import android.support.v4.os.BuildCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -70,6 +69,7 @@ import java.util.regex.Pattern;
 
 /**
  * Various utilities shared amongst the Launcher's classes.
+ * 在launcher类中的各种公用程序
  */
 public final class Utilities {
 
@@ -81,7 +81,9 @@ public final class Utilities {
     private static final int[] sLoc0 = new int[2];
     private static final int[] sLoc1 = new int[2];
     private static final float[] sPoint = new float[2];
+    /* 3*3转换坐标基类 */
     private static final Matrix sMatrix = new Matrix();
+    /* 逆向的matrix */
     private static final Matrix sInverseMatrix = new Matrix();
 
     public static boolean isAtLeastO() {
@@ -89,16 +91,16 @@ public final class Utilities {
     }
 
     public static final boolean ATLEAST_NOUGAT_MR1 =
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1;
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1;//25
 
     public static final boolean ATLEAST_NOUGAT =
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;//24
 
     public static final boolean ATLEAST_MARSHMALLOW =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;//23
 
     public static final boolean ATLEAST_LOLLIPOP_MR1 =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1;
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1;//22
 
     /**
      * Indicates if the device has a debug build. Should only be used to store additional info or
@@ -112,18 +114,20 @@ public final class Utilities {
     public static final int COLOR_EXTRACTION_JOB_ID = 1;
 
     // These values are same as that in {@link AsyncTask}.
-    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+
+    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();  //cpu核数
     private static final int CORE_POOL_SIZE = CPU_COUNT + 1;
     private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
     private static final int KEEP_ALIVE = 1;
     /**
      * An {@link Executor} to be used with async task with no limit on the queue size.
+     * LinkedBlockingQueue，一个阻塞的线程安全的队列，底层采用链表实现。若没有指定大小，则默认大小为Integer.MAX_VALUE。
      */
     public static final Executor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(
             CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE,
             TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
-    public static final String ALLOW_ROTATION_PREFERENCE_KEY = "pref_allowRotation";
+    public static final String ALLOW_ROTATION_PREFERENCE_KEY = "pref_allowRotation";//键值_允许有限旋转
 
     public static boolean isPropertyEnabled(String propertyName) {
         return Log.isLoggable(propertyName, Log.VERBOSE);
@@ -149,6 +153,7 @@ public final class Utilities {
     /**
      * Given a coordinate relative to the descendant, find the coordinate in a parent view's
      * coordinates.
+     * 子控件获取父控件的相对坐标
      *
      * @param descendant The descendant to which the passed coordinate is relative.
      * @param ancestor The root view to make the coordinates relative to.
